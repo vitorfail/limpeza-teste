@@ -7,25 +7,73 @@
   justify-content: center;
   align-items: center;
 }
+.login p{
+  font-size: 40px;
+  color: var(--fundo34);
+}
+.login .placa{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login .placa button{
+  border-radius: 20px;
+  color: var(--fundo3);
+  background: var(--branco);
+  font-size: 20px;
+  font-weight: 300;
+  height: 34px;
+  width: 120px;
+  border: none;
+}
 .login{
   box-shadow: 0px 0px 6px var(--sombra);
   display: flex;
   width: 70%;
   height: 70%;
 }
-.login .lado-direto .entrada{
+.login .entrada{
+  background: var(--branco);
+  width: 300px;
+  height: 38px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
-.login .lado-direto .entrada img{
+.login .entrada{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.login .lado-esquerdo button, .login .lado-direto button{
+  background: var(--fundo2);
+  color: white;
+  height: 50px;
+  outline: none;
+  border: none;
+  width: 300px;
+}
+.login .lado-esquerdo button:hover, .login .lado-direto button:hover{
+  background: white;
+  color: var(--fundo3);
+  cursor: pointer;
+  border: 2px solid var(--fundo3);
+}
+.login .entrada img{
+  margin-right: 9px;
   width: 20px;
   height: auto;
 }
-.login .lado-direto .entrada input{
+.login .entrada input{
+  font-size: 17px;
   outline: none;
+  background: transparent;
   border: none;
 }
 .login .lado-direto, .login .lado-esquerdo{
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50%;
   height: 100%;
 }
