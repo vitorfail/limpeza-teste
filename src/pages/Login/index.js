@@ -1,8 +1,5 @@
 import './index.css';
-import Sidebar from "../../components/Sidebar/index"
-import { useEffect, useState } from 'react';
-import Cli from "../../img/client.png"
-import Pesquisa from '../../components/Pesquisa';
+import { useState } from 'react';
 import Cliente from "../../img/client.png"
 import Cadeado from "../../img/senha.png"
 import Axios from '../../Axios';
@@ -13,9 +10,13 @@ function Login() {
   const titulo_reg= "Cadastrar"
   const log = "Caso já tenha uma conta você pode efetuar seu login para iniciar sua sessão"
   const reg = "Se você ainda não tem uma conta pode criar a sua. Creie um nome de usuário e uma senha. "
+  const erro_senha_user = "Senha ou usuário errado"
+  const erro_exist = "Usuário já existe"
   const [lado, setlado] = useState("35%")
   const [ titulo, settitulo] = useState(titulo_reg)
   const [ info, setinfo] = useState(reg)
+  const [mensagem, setmensagem] = useState("")
+  const [loading, setloading] = useState(false)
 
   const [user, setuser] = useState("")
   const [senha, setsenha] = useState("")
@@ -48,7 +49,8 @@ function Login() {
       }
     }
     else{
-
+      setloading(true)
+      setmensagem(erro_exist)
     }
   }
   return (
@@ -61,7 +63,21 @@ function Login() {
           <button onClick={() => trocar()}>{titulo} </button>
         </div>
         <div className='lado-direto'>
+          <div className={loading?'loading show': 'loading' }>
+            <div class="lds-grid">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
           <p>LOGIN</p>
+          <h3>{mensagem}</h3>
           <div className='entrada'>
             <img alt='user' src={Cliente}></img>
             <input onChange={(e) => setuser(e.target.value)} placeholder='Usuário'></input>
