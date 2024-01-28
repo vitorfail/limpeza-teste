@@ -5,6 +5,8 @@ import Cli from "../../img/client.png"
 import Pesquisa from '../../components/Pesquisa';
 import Cliente from "../../img/client.png"
 import Cadeado from "../../img/senha.png"
+import Axios from '../../Axios';
+import { Url } from '../../Server';
 
 function Login() {
   const titulo_log= "Login"
@@ -14,6 +16,12 @@ function Login() {
   const [lado, setlado] = useState("35%")
   const [ titulo, settitulo] = useState(titulo_reg)
   const [ info, setinfo] = useState(reg)
+
+  const [user, setuser] = useState("")
+  const [senha, setsenha] = useState("")
+
+  const [aviso_senha, setaviso_senha] = useState(false)
+  const [aviso_user, setaviso_user] = useState(false)
 
   function trocar(){
     if(lado === "35%"){
@@ -26,6 +34,21 @@ function Login() {
       setlado("35%")
       setinfo(reg)
       settitulo(titulo_reg)
+    }
+  }
+  function login(){
+    setaviso_senha(false)
+    setaviso_user(false)
+    if(user === "" || senha ===""){
+      if(user === ""){
+        setaviso_user(true)
+      }
+      if(senha === ""){
+        setaviso_senha(true)
+      }
+    }
+    else{
+
     }
   }
   return (
@@ -41,13 +64,15 @@ function Login() {
           <p>LOGIN</p>
           <div className='entrada'>
             <img alt='user' src={Cliente}></img>
-            <input placeholder='Usuário'></input>
+            <input onChange={(e) => setuser(e.target.value)} placeholder='Usuário'></input>
           </div>
+          <p className={aviso_user?"aviso show": "aviso"} >Insira seu usuário</p>
           <div className='entrada'>
             <img alt='senha' src={Cadeado}></img>
-            <input type="password" placeholder='Senha'></input>
+            <input onChange={(e) => setsenha(e.target.value)} type="password" placeholder='Senha'></input>
           </div>
-          <button>ACESSAR</button>
+          <p className={aviso_senha?"aviso show": "aviso"}>Insira sua senha</p>
+          <button onClick={() => login()}>ACESSAR</button>
         </div>
         <div className='lado-esquerdo'>
         <p>CADASTRAR</p>

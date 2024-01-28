@@ -7,6 +7,14 @@
   justify-content: center;
   align-items: center;
 }
+.login .aviso{
+  font-size: 15px;
+  opacity: 0;
+  color: red;
+}
+.login .aviso.show{
+  opacity: 1;
+}
 .login p{
   font-size: 40px;
   color: var(--fundo34);
