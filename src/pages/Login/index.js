@@ -20,9 +20,14 @@ function Login() {
 
   const [user, setuser] = useState("")
   const [senha, setsenha] = useState("")
+  const [senha2, setsenha2] = useState("")
 
   const [aviso_senha, setaviso_senha] = useState(false)
   const [aviso_user, setaviso_user] = useState(false)
+
+  const [senha_tamanho, setsenha_tamanho] = useState(false)
+  const [senha_numero, setsenha_numero] = useState(false)
+  const [senha_diferente, setsenha_diferente] = useState(false)
 
   function trocar(){
     if(lado === "35%"){
@@ -41,17 +46,56 @@ function Login() {
     setaviso_senha(false)
     setaviso_user(false)
     if(user === "" || senha ===""){
-      if(user === ""){
-        setaviso_user(true)
-      }
       if(senha === ""){
         setaviso_senha(true)
+      }
+      if(user === ""){
+        setaviso_user(true)
       }
     }
     else{
       setloading(true)
       setmensagem(erro_exist)
     }
+  }
+  function senha_1(e){
+    setsenha(e)
+    if(e != ""){
+      if(e.length < 9){
+        setsenha_tamanho(true)
+      }
+      else{
+        setsenha_tamanho(false)
+      }
+      if(/\d/.test(e) === false){
+        setsenha_numero(true)
+      }
+      else{
+        setsenha_numero(false)
+      }
+      if(senha !== senha2){
+        setsenha_diferente(true)
+      }
+      else{
+        setsenha_diferente(false)
+      }
+    }
+    else{
+      setsenha_tamanho(false)
+      setsenha_numero(false)
+      setsenha_diferente(false)
+    }
+  }
+  function senha_2(e){
+    setsenha2(e)
+    console.log(senha + ' ' + senha2)
+    if(senha !== e){
+      setsenha_diferente(true)
+    }
+    else{
+      setsenha_diferente(false)
+    }
+
   }
   return (
     <div className="initial">
@@ -64,7 +108,7 @@ function Login() {
         </div>
         <div className='lado-direto'>
           <div className={loading?'loading show': 'loading' }>
-            <div class="lds-grid">
+            <div className="lds-grid">
               <div></div>
               <div></div>
               <div></div>
@@ -77,7 +121,7 @@ function Login() {
             </div>
           </div>
           <p>LOGIN</p>
-          <h3>{mensagem}</h3>
+          <h3 className={ mensagem!==""?"mensagem show":"mensagem"} >{mensagem}</h3>
           <div className='entrada'>
             <img alt='user' src={Cliente}></img>
             <input onChange={(e) => setuser(e.target.value)} placeholder='Usuário'></input>
@@ -96,14 +140,19 @@ function Login() {
             <img alt='user' src={Cliente}></img>
             <input placeholder='Usuário'></input>
           </div>
+          <p>Insira um usuário</p>
           <div className='entrada'>
             <img alt='senha' src={Cadeado}></img>
-            <input type="password" placeholder='Senha'></input>
+            <input onChange={(e) => senha_1(e.target.value)} type="password" placeholder='Senha'></input>
           </div>
           <div className='entrada'>
             <img alt='senha' src={Cadeado}></img>
-            <input type="password" placeholder='Confirmar senha'></input>
+            <input onChange={(e) => senha_2(e.target.value)} type="password" placeholder='Confirmar senha'></input>
           </div>
+
+          <p className={senha_tamanho?'avisos show':'avisos'}><strong>X</strong> A senha deve ter no minimo 9 caracteres</p>
+          <p className={senha_numero?'avisos show':'avisos'}><strong>X</strong>A senha deve tem pelo menos um número</p>
+          <p className={senha_diferente?'avisos show':'avisos'}><strong>X</strong>As senhas estão diferentes</p>
           <button>REGISTRAR</button>
         </div>
       </div>
