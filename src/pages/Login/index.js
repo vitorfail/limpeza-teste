@@ -7,20 +7,35 @@ import Cliente from "../../img/client.png"
 import Cadeado from "../../img/senha.png"
 
 function Login() {
+  const titulo_log= "Login"
+  const titulo_reg= "Cadastrar"
+  const log = "Caso já tenha uma conta você pode efetuar seu login para iniciar sua sessão"
+  const reg = "Se você ainda não tem uma conta pode criar a sua. Creie um nome de usuário e uma senha. "
   const [lado, setlado] = useState("35%")
+  const [ titulo, settitulo] = useState(titulo_reg)
+  const [ info, setinfo] = useState(reg)
+
   function trocar(){
     if(lado === "35%"){
       setlado("0")
+      setinfo(log)
+      settitulo(titulo_log)
+
     }
     else{
       setlado("35%")
+      setinfo(reg)
+      settitulo(titulo_reg)
     }
   }
   return (
     <div className="initial">
       <div className='login'>
         <div className='placa' style={{marginLeft:lado}}>
-          <button onClick={() => trocar()}>Trocar</button>
+          <p>{titulo}</p>
+          <h4>{info}</h4>
+
+          <button onClick={() => trocar()}>{titulo} </button>
         </div>
         <div className='lado-direto'>
           <p>LOGIN</p>

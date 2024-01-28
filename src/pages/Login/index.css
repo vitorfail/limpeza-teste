@@ -77,12 +77,26 @@
   width: 50%;
   height: 100%;
 }
+.login .placa p{
+  margin-bottom: 20px;
+}
+.login .placa h4{
+  width: 350px;
+  text-align: center;
+  margin-bottom: 50px;
+}
 .login .placa{
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: var(--branco);
+  transition: all 0.2s ease-in-out;
   z-index: 10;
   width: 37%;
   height: inherit;
   position: absolute;
-  background: var(--fundo4);
+  background: linear-gradient(to bottom right ,var(--fundo4), var(--fundo2));
 }
 .login .lado-direto{
   background: white;
