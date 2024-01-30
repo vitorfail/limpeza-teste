@@ -44,7 +44,6 @@ function Home() {
           }
         }
       ).catch(err => {
-        console.log(err)
         setpopup_conexao(true)
       })
   
@@ -126,8 +125,17 @@ function Home() {
               <text x="350" y="220">1</text>
               <text x="210" y="50">2</text>
               <text x="210" y="150">1</text>
+
+              <text x="2" y="-20">1</text>
+              <text x="2" y="-40">2</text>
+              <text x="2" y="-60">3</text>
+              <text x="2" y="-80">4</text>
+
               <text x="210" y="250">0</text>
-              <text x="-20" y="10">-1</text>
+              <text x="0" y="20">-1</text>
+              <text x="0" y="40">-2</text>
+              <text x="0" y="60">-3</text>
+              <text x="0" y="80">-4</text>
               {pontos.map((key,item) => (
                      <circle key={key} cx={item.x} cy={item.y} r="4" />
                   ))}            

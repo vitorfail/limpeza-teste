@@ -6,14 +6,74 @@
   height: 100%;
   background: var(--branco);
 }
+.content .cad .form{
+  height: 80%;
+  width: 60%;
+  background: white;
+  box-shadow: 0px 0px 3px var(--sombra);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.content .cad{
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
 .content .cadastro-input{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: flex-start;
+  justify-content: center;
+}
+.content .cadastro-input p{
+  font-size: 20px;
+  color: var(--fundo3);
+  font-weight: 300;
+}
+.content .positions{
+  width: 45%;
+  display: flex;
+  justify-content: space-between;
+}
+.content .positions .cadastro-input input{
+  width: 100px;
 }
 .content .cadastro-input input{
-  width: 200px;
+  border: none;
+  background: var(--branco2);
+  width: 300px;
+  padding: 15px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  height:20px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+.content .cadastro-input input:focus{
+  outline: 1px solid var(--fundo3);
+  box-shadow: 0px 0px 3px var(--sombra);
+}
+.content .cad button{
+  color: var(--branco);
+  margin-top: 10px;
+  height: 40px;
+  width: 45%;
+  font-size: 20px;
+  background: var(--fundo3);
+  border: none;
+}
+.content .cad button:hover{
+  cursor: pointer;
+  border: 1px solid var(--fundo3);
+  background: white;
+  color: var(--fundo3);
 }
 @media screen and (max-width:600px) {
   .content{

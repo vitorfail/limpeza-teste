@@ -84,8 +84,8 @@ line {
   stroke-width: 0.3;
 }
 .mapa text {
-  font-weight: 100;
-  font-size: 10px;
+  font-weight: 200;
+  font-size: 8px;
   fill: var(--fundo4);
 }
 .mapa circle{

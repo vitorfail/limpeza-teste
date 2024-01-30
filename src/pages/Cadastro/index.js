@@ -13,9 +13,6 @@ function Cadastro() {
   const {setpopup_aviso} = useContext(Context)
   const [pontos, setpontos] = useState([])
 
-  useEffect(async () =>{
-
-  }, [])
   function cadastrar(){
     
   }
@@ -24,26 +21,31 @@ function Cadastro() {
       <Sidebar></Sidebar>
       <div className='content'>
         <Pesquisa></Pesquisa>
-        <div>
-          <div className='cadastro-input'>
-            <p>Nome</p>
-            <input></input>
-          </div>
-          <div className='cadastro-input'>
-            <p>Email</p>
-            <input></input>
-          </div>
-          <div className='cadastro-input'>
-            <p>Telefone</p>
-            <input></input>
-          </div>
-          <div className='cadastro-input'>
-            <p>Posicão X</p>
-            <input></input>
-          </div>
-          <div className='cadastro-input'>
-            <p>Posição Y</p>
-            <input></input>
+        <div className='cad'>
+          <div className='form'>
+            <div className='cadastro-input'>
+              <p>Nome</p>
+              <input></input>
+            </div>
+            <div className='cadastro-input'>
+              <p>Email</p>
+              <input></input>
+            </div>
+            <div className='cadastro-input'>
+              <p>Telefone</p>
+              <input></input>
+            </div>
+            <div className='positions'>
+              <div className='cadastro-input'>
+                <p>Posicão X</p>
+                <input></input>
+              </div>
+              <div className='cadastro-input'>
+                <p>Posição Y</p>
+                <input></input>
+              </div>
+            </div>
+            <button>Cadastro</button>
           </div>
         </div>
       </div>
