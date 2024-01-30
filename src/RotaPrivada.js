@@ -1,4 +1,4 @@
-import { Redirect, Route} from 'react-router-dom';
+import { Redirect, Route} from 'react-router-dom/cjs/react-router-dom.min';
 
 function Resolver() {
     try{

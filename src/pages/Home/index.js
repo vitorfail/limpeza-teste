@@ -10,43 +10,47 @@ function Home() {
   const [cliente, setclientes] = useState(13)
   const [cliente_prox, setcliente_prox] = useState("José")
   const [cliente_long, setcliente_log] = useState("Gilberto")
-  const {setpopup_aviso} = useContext(Context)
+  const {setpopup_conexao} = useContext(Context)
   const [pontos, setpontos] = useState([])
 
-  useEffect(async () =>{
-    await Axios.post("api/home").then(
-      res =>{
-        if(res.data.result.status === 0){
-          setpopup_aviso(true)
-        }
-        if(res.data.result.status === "ok"){
-          setclientes(res.data.result.total)
-          setcliente_prox(res.data.result.cliente_prox)
-          setcliente_log(res.data.result.cliente_long)
-          setpontos(res.data.result.pontos)
+  useEffect( () =>{
 
-          const percentageA = 40;
-          const percentageB = 60;
-      
-          // Calcula o ângulo com base nas porcentagens
-          const angleA = (percentageA / 100) * 360;
-          const angleB = (percentageB / 100) * 360;
-      
-          // Atualiza o tamanho das fatias
-          const sliceA = document.getElementById('slicea');
-          sliceA.setAttribute('d', calculateSlicePath(0, angleA));
-      
-          const sliceB = document.getElementById('sliceb');
-          sliceB.setAttribute('d', calculateSlicePath(angleA, angleB));
-      
+    async function inicio(){
+      await Axios.post("api/home").then(
+        res =>{
+          if(res.data.result.status === 0){
+            setpopup_conexao(true)
+          }
+          if(res.data.result.status === "ok"){
+            setclientes(res.data.result.result.total)
+            setcliente_prox(res.data.result.result.cliente_prox)
+            setcliente_log(res.data.result.result.cliente_long)
+            setpontos(res.data.result.result.pontos)
+  
+            const percentageA = 40;
+            const percentageB = 60;
+        
+            // Calcula o ângulo com base nas porcentagens
+            const angleA = (percentageA / 100) * 360;
+            const angleB = (percentageB / 100) * 360;
+        
+            // Atualiza o tamanho das fatias
+            const sliceA = document.getElementById('slicea');
+            sliceA.setAttribute('d', calculateSlicePath(0, angleA));
+        
+            const sliceB = document.getElementById('sliceb');
+            sliceB.setAttribute('d', calculateSlicePath(angleA, angleB));
+        
+          }
         }
-      }
-    ).catch(err => {
-      console.log(err)
-      setpopup_aviso(true)
-    })
+      ).catch(err => {
+        console.log(err)
+        setpopup_conexao(true)
+      })
+  
+    }
   // Função para calcular o caminho da fatia
-
+  inicio()
   }, [])
   const calculateSlicePath = (startAngle, endAngle) => {
     const radius = 50;
@@ -88,34 +92,33 @@ function Home() {
         <div className='analise'>
           <div className='mapa'>
             <p>Distribuição de clientes pela distância</p>
-            <svg className="chart" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0" y1="200" x2="400" y2="200"></line>
+            <svg className="chart" viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
+              <line x1="-100" y1="0" x2="100" y2="0"></line>
+              <line x1="0" y1="-100" x2="0" y2="100"></line>
+              
+              <line className='fina' x1="-100" y1="20" x2="100" y2="20"></line>
+              <line className='fina' x1="-100" y1="40" x2="100" y2="40"></line>
+              <line className='fina' x1="-100" y1="60" x2="100" y2="60"></line>
+              <line className='fina' x1="-100" y1="80" x2="100" y2="80"></line>
+              <line className='fina' x1="-100" y1="100" x2="100" y2="100"></line>
+              <line className='fina' x1="-100" y1="-20" x2="100" y2="-20"></line>
+              <line className='fina' x1="-100" y1="-40" x2="100" y2="-40"></line>
+              <line className='fina' x1="-100" y1="-60" x2="100" y2="-60"></line>
+              <line className='fina' x1="-100" y1="-80" x2="100" y2="-80"></line>
+              <line className='fina' x1="-100" y1="-100" x2="100" y2="-100"></line>
 
-              <line className='fina' x1="200" y1="0" x2="200" y2="400"></line>
-              <line className='fina' x1="0" y1="50" x2="400" y2="50"></line>
-              <line className='fina' x1="0" y1="100" x2="400" y2="100"></line>
-              <line className='fina' x1="0" y1="150" x2="400" y2="150"></line>
-              <line className='fina' x1="0" y1="200" x2="400" y2="200"></line>
-              <line className='fina' x1="0" y1="250" x2="400" y2="250"></line>
-              <line className='fina' x1="0" y1="300" x2="400" y2="300"></line>
-              <line className='fina' x1="0" y1="350" x2="400" y2="350"></line>
-
-              <line className='fina' x1="50" y1="0" x2="50" y2="400"></line>
-              <line className='fina' x1="100" y1="0" x2="100" y2="400"></line>
-              <line className='fina' x1="150" y1="0" x2="150" y2="400"></line>
-              <line className='fina' x1="200" y1="0" x2="200" y2="400"></line>
-              <line className='fina' x1="250" y1="0" x2="250" y2="400"></line>
-              <line className='fina' x1="300" y1="0" x2="300" y2="400"></line>
-              <line className='fina' x1="350" y1="0" x2="350" y2="400"></line>
-              <line className='fina' x1="50" y1="195" x2="50" y2="205"></line>
-              <line className='fina' x1="150" y1="195" x2="150" y2="205"></line>
-              <line className='fina' x1="250" y1="195" x2="250" y2="205"></line>
-              <line className='fina' x1="350" y1="195" x2="350" y2="205"></line>
-
-              <line x1="195" y1="50" x2="205" y2="50"></line>
-              <line x1="195" y1="150" x2="205" y2="150"></line>
-              <line x1="195" y1="250" x2="205" y2="250"></line>
-              <line x1="195" y1="350" x2="205" y2="350"></line>
+              <line className='fina' x1="0" y1="-100" x2="0" y2="100"></line>
+              <line className='fina' x1="20" y1="-100" x2="20" y2="100"></line>
+              <line className='fina' x1="40" y1="-100" x2="40" y2="100"></line>
+              <line className='fina' x1="60" y1="-100" x2="60" y2="100"></line>
+              <line className='fina' x1="80" y1="-100" x2="80" y2="100"></line>
+              <line className='fina' x1="100" y1="-100" x2="100" y2="100"></line>
+              <line className='fina' x1="0" y1="-100" x2="0" y2="100"></line>
+              <line className='fina' x1="-20" y1="-100" x2="-20" y2="100"></line>
+              <line className='fina' x1="-40" y1="-100" x2="-40" y2="100"></line>
+              <line className='fina' x1="-60" y1="-100" x2="-60" y2="100"></line>
+              <line className='fina' x1="-80" y1="-100" x2="-80" y2="100"></line>
+              <line className='fina' x1="-100" y1="-100" x2="-100" y2="100"></line>
 
               <text x="50" y="220">-2</text>
               <text x="150" y="220">-1</text>
@@ -124,7 +127,10 @@ function Home() {
               <text x="210" y="50">2</text>
               <text x="210" y="150">1</text>
               <text x="210" y="250">0</text>
-              <text x="210" y="350">-1</text>
+              <text x="-20" y="10">-1</text>
+              {pontos.map((key,item) => (
+                     <circle key={key} cx={item.x} cy={item.y} r="4" />
+                  ))}            
             </svg>        
           </div>
           <div className='pizza'>
@@ -137,9 +143,6 @@ function Home() {
 
                   <path className="slice" id="sliceb"  d="M0,0 L0,50 A50,50 0 0,1 0,-50 Z" fill="#2196F3"></path>
                   <text className="label" x="0" y="25">Categoria B</text>    
-                  {pontos.map((key,item) => (
-                     <circle cx={item.x} cy={item.y} r="4" />
-                  ))}            
                 </g>
               </svg>
             </div>

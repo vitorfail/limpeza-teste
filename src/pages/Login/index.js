@@ -3,7 +3,6 @@ import { useContext, useState } from 'react';
 import Cliente from "../../img/client.png"
 import Cadeado from "../../img/senha.png"
 import Axios from '../../Axios';
-import { Url } from '../../Server';
 import { Context } from '../../Provider';
 import { useHistory } from 'react-router-dom';
 
@@ -75,7 +74,7 @@ function Login() {
         }
         else{
           localStorage.setItem("token_jwt", res.data.result.token)
-          history.push("/home")
+          history.push("/")
         }
       })
     }
