@@ -1,0 +1,26 @@
+#ok img{
+  animation: icon 0.8s linear;
+  width: 30%;
+  height: auto;
+}
+#ok button{
+  color: var(--branco);
+  height: 40px;
+  width: 40%;
+  font-size: 20px;
+  background: rgb(0, 85, 35);
+  border: none;
+}
+#ok button:hover{
+  cursor: pointer;
+  border: 1px solid rgb(0, 85, 35);
+  background: white;
+  color: rgb(0, 85, 35);
+}
+#ok p{
+  color: black;
+  width: 70%;
+  text-align: center;
+  font-weight: 200;
+  padding-bottom: 20px;
+}

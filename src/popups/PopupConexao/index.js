@@ -8,7 +8,7 @@ export default function PopupAvisoConexao(){
     const history = useHistory()
     function voltar(){
         setpopup_conexao(false)
-        history.push("/")
+        history.push("/login")
     }
     return(
         <div id="erro" className={popup_conexao?"popup show": "popup"} >

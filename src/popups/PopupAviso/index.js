@@ -6,7 +6,7 @@ export default function PopupAviso(){
     const {popup_aviso, setpopup_aviso} = useContext(Context)
     return(
         <div id="erro" className={popup_aviso?"popup show": "popup"} >
-            <div className="modal">
+            <div className={popup_aviso?"modal show": "modal"}>
                 <img alt="err" src={Erro} ></img>
                 <p>Houve Algúm problema na conexão. Não foi possivel cadastrar esse usuário. Tente denovo mais tarde</p>
                 <button onClick={() => setpopup_aviso(false)}>Ok</button>

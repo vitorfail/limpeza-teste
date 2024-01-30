@@ -5,6 +5,9 @@ import Cli from "../../img/client.png"
 import Pesquisa from '../../components/Pesquisa';
 import Axios from '../../Axios';
 import { Context } from '../../Provider';
+import PopupAviso from '../../popups/PopupAviso';
+import PopupConexao from '../../popups/PopupConexao';
+
 
 function Home() {
   const [cliente, setclientes] = useState(13)
@@ -19,6 +22,7 @@ function Home() {
       await Axios.post("api/home").then(
         res =>{
           if(res.data.result.status === 0){
+            console.log(res.data)
             setpopup_conexao(true)
           }
           if(res.data.result.status === "ok"){
@@ -61,6 +65,8 @@ function Home() {
     return `M0,0 L${startX},${startY} A${radius},${radius} 0 ${largeArcFlag},1 ${endX},${endY} Z`;  }
   return (
     <div className="App">
+      <PopupAviso></PopupAviso>
+      <PopupConexao></PopupConexao>
       <Sidebar></Sidebar>
       <div className='content'>
         <Pesquisa></Pesquisa>

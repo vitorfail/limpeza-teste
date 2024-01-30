@@ -5,6 +5,8 @@ import Cadeado from "../../img/senha.png"
 import Axios from '../../Axios';
 import { Context } from '../../Provider';
 import { useHistory } from 'react-router-dom';
+import PopupAviso from '../../popups/PopupAviso';
+import PopupAvisoConexao from '../../popups/PopupConexao';
 
 function Login() {
   const {setpopup_aviso} = useContext(Context)
@@ -52,9 +54,11 @@ function Login() {
     }
   }
   function login(){
+    setloading_1(true)
     setaviso_senha(false)
     setaviso_user(false)
     if(user === "" || senha ===""){
+      setloading_1(false)
       if(senha === ""){
         setaviso_senha(true)
       }
@@ -67,15 +71,22 @@ function Login() {
       .then(res => {
         setloading_1(false)
         if(res.data.result.status === 0){
+          setloading_1(false)
           setpopup_aviso(true)
         }
         if(res.data.result.status === "EXIST"){
+          setloading_1(false)
           setmensagem(erro_exist)
         }
         else{
+          setloading_1(false)
           localStorage.setItem("token_jwt", res.data.result.token)
           history.push("/")
         }
+      })
+      .catch(err => {
+        setloading_1(false)
+        setpopup_aviso(true)
       })
     }
   }
@@ -108,9 +119,8 @@ function Login() {
     }
   }
   function senha_2(e){
-    console.log(senha + ' ' + e)
     if(senha !== e){
-      setsenha(e)
+      setsenha2(e)
       setsenha_diferente(true)
     }
     else{
@@ -141,7 +151,7 @@ function Login() {
           }
         )
         .catch(err => {
-
+          setloading_2(false)
         })
       }
     }
@@ -149,6 +159,8 @@ function Login() {
   }
   return (
     <div className="initial">
+      <PopupAviso></PopupAviso>
+      <PopupAvisoConexao></PopupAvisoConexao>
       <div className='login'>
         <div className='placa' style={{marginLeft:lado}}>
           <p>{titulo}</p>
