@@ -88,6 +88,9 @@ line {
   font-size: 15px;
   fill: var(--fundo4);
 }
+.mapa circle{
+  fill:var(--fundo4);
+}
 .chart-container {
   width: 50%; /* Largura do contêiner do gráfico de pizza */
   max-width: 400px; /* Largura máxima do contêiner */

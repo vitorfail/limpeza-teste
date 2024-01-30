@@ -1,27 +1,50 @@
 import './index.css';
 import Sidebar from "../../components/Sidebar/index"
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Cli from "../../img/client.png"
 import Pesquisa from '../../components/Pesquisa';
+import Axios from '../../Axios';
+import { Context } from '../../Provider';
 
 function Home() {
   const [cliente, setclientes] = useState(13)
   const [cliente_prox, setcliente_prox] = useState("José")
   const [cliente_long, setcliente_log] = useState("Gilberto")
-  useEffect(() =>{
-    const percentageA = 40;
-    const percentageB = 60;
+  const {setpopup_aviso} = useContext(Context)
+  const [pontos, setpontos] = useState([])
 
-    // Calcula o ângulo com base nas porcentagens
-    const angleA = (percentageA / 100) * 360;
-    const angleB = (percentageB / 100) * 360;
+  useEffect(async () =>{
+    await Axios.post("api/home").then(
+      res =>{
+        if(res.data.result.status === 0){
+          setpopup_aviso(true)
+        }
+        if(res.data.result.status === "ok"){
+          setclientes(res.data.result.total)
+          setcliente_prox(res.data.result.cliente_prox)
+          setcliente_log(res.data.result.cliente_long)
+          setpontos(res.data.result.pontos)
 
-    // Atualiza o tamanho das fatias
-    const sliceA = document.getElementById('slicea');
-    sliceA.setAttribute('d', calculateSlicePath(0, angleA));
-
-    const sliceB = document.getElementById('sliceb');
-    sliceB.setAttribute('d', calculateSlicePath(angleA, angleB));
+          const percentageA = 40;
+          const percentageB = 60;
+      
+          // Calcula o ângulo com base nas porcentagens
+          const angleA = (percentageA / 100) * 360;
+          const angleB = (percentageB / 100) * 360;
+      
+          // Atualiza o tamanho das fatias
+          const sliceA = document.getElementById('slicea');
+          sliceA.setAttribute('d', calculateSlicePath(0, angleA));
+      
+          const sliceB = document.getElementById('sliceb');
+          sliceB.setAttribute('d', calculateSlicePath(angleA, angleB));
+      
+        }
+      }
+    ).catch(err => {
+      console.log(err)
+      setpopup_aviso(true)
+    })
   // Função para calcular o caminho da fatia
 
   }, [])
@@ -113,7 +136,11 @@ function Home() {
                   <text className="label" x="0" y="-25">Categoria A</text>
 
                   <path className="slice" id="sliceb"  d="M0,0 L0,50 A50,50 0 0,1 0,-50 Z" fill="#2196F3"></path>
-                  <text className="label" x="0" y="25">Categoria B</text>                </g>
+                  <text className="label" x="0" y="25">Categoria B</text>    
+                  {pontos.map((key,item) => (
+                     <circle cx={item.x} cy={item.y} r="4" />
+                  ))}            
+                </g>
               </svg>
             </div>
 
