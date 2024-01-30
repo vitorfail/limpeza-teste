@@ -62,10 +62,10 @@ function Home() {
           </div>
 
         </div>
-        <div style={{width:'100%', height:"100%", display:"flex", justifyContent:"space-between"}}>
+        <div className='analise'>
           <div className='mapa'>
             <p>Distribuição de clientes pela distância</p>
-            <svg class="chart" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <svg className="chart" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
               <line x1="0" y1="200" x2="400" y2="200"></line>
 
               <line className='fina' x1="200" y1="0" x2="200" y2="400"></line>
@@ -106,8 +106,8 @@ function Home() {
           </div>
           <div className='pizza'>
             <p>Resumo</p>
-            <div class="chart-container">
-              <svg class="chart2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <div className="chart-container">
+              <svg className="chart2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <g transform="translate(50,50)">
                   <path className="slice" id="slicea" d="M0,0 L0,-50 A50,50 0 0,1 0,50 Z" fill="#4CAF50"></path>
                   <text className="label" x="0" y="-25">Categoria A</text>

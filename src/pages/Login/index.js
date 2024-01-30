@@ -1,11 +1,15 @@
 import './index.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Cliente from "../../img/client.png"
 import Cadeado from "../../img/senha.png"
 import Axios from '../../Axios';
 import { Url } from '../../Server';
+import { Context } from '../../Provider';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
+  const {setpopup_aviso} = useContext(Context)
+  const history = useHistory()
   const titulo_log= "Login"
   const titulo_reg= "Cadastrar"
   const log = "Caso já tenha uma conta você pode efetuar seu login para iniciar sua sessão"
@@ -15,13 +19,19 @@ function Login() {
   const [lado, setlado] = useState("35%")
   const [ titulo, settitulo] = useState(titulo_reg)
   const [ info, setinfo] = useState(reg)
+
   const [mensagem, setmensagem] = useState("")
-  const [loading, setloading] = useState(false)
+  const [ mensagem_cadastro, setmensagem_cadastro] = useState(false)
+
+  const [loading_1, setloading_1] = useState(false)
+  const [loading_2, setloading_2] = useState(false)
 
   const [user, setuser] = useState("")
+  const [user_cad, setuser_cad] = useState("")
   const [senha, setsenha] = useState("")
   const [senha2, setsenha2] = useState("")
 
+  const [ aviso_cadastro, setaviso_cadastro] = useState(false)
   const [aviso_senha, setaviso_senha] = useState(false)
   const [aviso_user, setaviso_user] = useState(false)
 
@@ -54,8 +64,20 @@ function Login() {
       }
     }
     else{
-      setloading(true)
-      setmensagem(erro_exist)
+      Axios.post("api/login", {user:user, senha:senha})
+      .then(res => {
+        setloading_1(false)
+        if(res.data.result.status === 0){
+          setpopup_aviso(true)
+        }
+        if(res.data.result.status === "EXIST"){
+          setmensagem(erro_exist)
+        }
+        else{
+          localStorage.setItem("token_jwt", res.data.result.token)
+          history.push("/home")
+        }
+      })
     }
   }
   function senha_1(e){
@@ -87,13 +109,42 @@ function Login() {
     }
   }
   function senha_2(e){
-    setsenha2(e)
-    console.log(senha + ' ' + senha2)
+    console.log(senha + ' ' + e)
     if(senha !== e){
+      setsenha(e)
       setsenha_diferente(true)
     }
     else{
       setsenha_diferente(false)
+    }
+
+  }
+  function registro(){
+    setloading_2(true)
+    if(user_cad ===""){
+      setaviso_cadastro(true)
+    }
+    else{
+      if(senha_tamanho === false && senha_numero === false && senha_diferente === false){
+        Axios.post("api/cadastro", {user:user_cad, senha:senha})
+        .then(res => {
+            setloading_2(false)
+            if(res.data.result.status === 0){
+              setpopup_aviso(true)
+            }
+            if(res.data.result.status === "EXIST"){
+              setmensagem_cadastro(true)
+            }
+            else{
+              setloading_2(false)
+              trocar()
+            }
+          }
+        )
+        .catch(err => {
+
+        })
+      }
     }
 
   }
@@ -107,7 +158,7 @@ function Login() {
           <button onClick={() => trocar()}>{titulo} </button>
         </div>
         <div className='lado-direto'>
-          <div className={loading?'loading show': 'loading' }>
+          <div className={loading_1?'loading show': 'loading' }>
             <div className="lds-grid">
               <div></div>
               <div></div>
@@ -136,11 +187,25 @@ function Login() {
         </div>
         <div className='lado-esquerdo'>
         <p>CADASTRAR</p>
+          <div className={loading_2?'loading show': 'loading' }>
+              <div className="lds-grid">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+          </div>
+          <h3 className={ mensagem_cadastro!==""?"mensagem show":"mensagem"}>Usuário já existe</h3>
           <div className='entrada'>
             <img alt='user' src={Cliente}></img>
-            <input placeholder='Usuário'></input>
+            <input onChange={(e) => setuser_cad(e.target.value)} placeholder='Usuário'></input>
           </div>
-          <p>Insira um usuário</p>
+          <p className= {aviso_cadastro?"aviso show": "aviso"} >Insira um usuário</p>
           <div className='entrada'>
             <img alt='senha' src={Cadeado}></img>
             <input onChange={(e) => senha_1(e.target.value)} type="password" placeholder='Senha'></input>
@@ -153,7 +218,7 @@ function Login() {
           <p className={senha_tamanho?'avisos show':'avisos'}><strong>X</strong> A senha deve ter no minimo 9 caracteres</p>
           <p className={senha_numero?'avisos show':'avisos'}><strong>X</strong>A senha deve tem pelo menos um número</p>
           <p className={senha_diferente?'avisos show':'avisos'}><strong>X</strong>As senhas estão diferentes</p>
-          <button>REGISTRAR</button>
+          <button onClick={() => registro()} >REGISTRAR</button>
         </div>
       </div>
     </div>
