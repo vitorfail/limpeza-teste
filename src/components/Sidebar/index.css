@@ -41,13 +41,14 @@
     height: auto;
 }
 .sidebar .ops .li{
-    padding-top: 10px;
+    padding: 10px 0px 10px 0px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
 }
 .sidebar .ops .icon{
+    margin-left: 10px;
     width: 25px;
     height: 25px;
     background-position: center;
@@ -61,6 +62,10 @@
 .sidebar .ops .li:nth-child(2) .icon{
     background-image: url("../../img/cad.png");
 }
+.sidebar .ops .li:nth-child(3) .icon{
+    background-image: url("../../img/exit.png");
+}
+
 .sidebar .ops p{
     font-weight: 200;
     transform: all 0.2s ease-in;

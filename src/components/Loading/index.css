@@ -1,7 +1,10 @@
 .loading.show{
     display: flex;
   }
-.loading{
+#hold{
+  display: none;
+}
+#principal{
     right: 0;
     display: none;
     width: 80%;

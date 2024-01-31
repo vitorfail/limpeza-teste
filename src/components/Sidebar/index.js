@@ -3,25 +3,25 @@ import Logo from "../../img/icon.png"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 export default function Sidebar(){
     const history = useHistory()
+    function exit(){
+        localStorage.removeItem("token_jwt")
+        history.push("/login")
+    }
     return(
         <div className="sidebar">
             <div className="logo">
                 <p>Limpeza</p>
             </div>
             <div className="ops">
-                <div className="li">
+                <div onClick={() =>history.push("/")}className="li">
                     <div className="icon"></div>
-                    <p onClick={() =>history.push("/")}>Home</p>
+                    <p >Home</p>
                 </div>
-                <div className="li">
+                <div  onClick={() =>history.push("/cadastro")}className="li">
                     <div className="icon"></div>
-                    <p onClick={() =>history.push("/cadastro")}>Cadastrar</p>
+                    <p >Cadastrar</p>
                 </div>
-                <div className="li">
-                    <div className="icon"></div>
-                    <p>Localização</p>
-                </div>
-                <div className="li">
+                <div onClick={() =>exit()} className="li">
                     <div className="icon"></div>
                     <p>Exit</p>
                 </div>

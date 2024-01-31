@@ -14,7 +14,7 @@ function Home() {
   const [cliente, setclientes] = useState(13)
   const [cliente_prox, setcliente_prox] = useState("José")
   const [cliente_long, setcliente_log] = useState("Gilberto")
-  const [maior_ponto,setmaior_ponto] = useState(200)
+  const [maior_ponto,setmaior_ponto] = useState(100)
   const {setpopup_conexao, setloading} = useContext(Context)
   const [pontos, setpontos] = useState([])
 
