@@ -21,8 +21,7 @@ export default function Pesquisa(){
                 setpopup_conexao(true)
               }
               if(res.data.result.status === "ok"){
-                console.log(res.data.result.result)
-                setpesquisa(res.data.result.result["0"])
+                setpesquisa(res.data.result.result)
                 history.push("/pesquisa")
               }
         })
