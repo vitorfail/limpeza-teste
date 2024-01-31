@@ -4,20 +4,25 @@ import Axios from "../../Axios"
 import { useContext, useState } from "react"
 import { Context } from "../../Provider"
 import { useHistory } from "react-router-dom"
+import Lista from "../../img/list.png"
 export default function Pesquisa(){
     const history = useHistory()
-    const {setpopup_conexao, setpesquisa, setpopup_ordem, setordem} = useContext(Context)
+    const {setpopup_conexao, setpesquisa, setpopup_ordem, setordem, setloading} = useContext(Context)
     const [valor_pesquisa, setvalor_pesquisa] = useState("")
+    const [show_menu, setshow_menu]= useState(false)
     const [option, setoption] = useState("nome")
     function pesquisa(){
+        setloading(true)
         Axios.post("api/pesquisa", {valor:valor_pesquisa, op: option})
         .then(res => {
+            setloading(false)
+            console.log(res.data.result)
             if(res.data.result.status === 0){
                 setpopup_conexao(true)
               }
               if(res.data.result.status === "ok"){
                 console.log(res.data.result.result)
-                setpesquisa(res.data.result.result)
+                setpesquisa(res.data.result.result["0"])
                 history.push("/pesquisa")
               }
         })
@@ -28,9 +33,11 @@ export default function Pesquisa(){
 
     }
     function abrirpopup(){
+        setloading(true)
         Axios.post("api/ordem")
         .then( res => {
-            if(res.data.result.status == "ok"){
+            setloading(false)
+            if(res.data.result.status === "ok"){
                 setordem(res.data.result.result)
                 setpopup_ordem(true)
             }
@@ -39,11 +46,18 @@ export default function Pesquisa(){
             }
         })
         .catch( err => {
+            setloading(false)
             setpopup_conexao(true)
         })
     }
     return(
         <div className="pesquisa">
+            <div className={show_menu?"mini-menu show": "mini-menu"}>
+                <p onClick={() => history.push("/")}>Home</p>
+                <p onClick={() => history.push("/cadastro")}>Cadastro</p>
+                <p onClick={() => history.push("/")}>Sair</p>
+            </div>
+            <img onClick={() => show_menu?setshow_menu(false): setshow_menu(true)} className="lista" alt="lista" src={Lista}></img>
             <div className="input">
                 <select onChange={(e) => setoption(e.target.value)}>
                     <option value="nome" >Nome</option>
@@ -55,7 +69,7 @@ export default function Pesquisa(){
                     <img src={Lupa} alt="pesquisa"></img>
                 </button>
             </div>
-            <button className="visita" onClick={() => abrirpopup()}>Ordem de Visita</button>
+            <button className="visita" onClick={() => abrirpopup()}></button>
         </div>
     )
 }

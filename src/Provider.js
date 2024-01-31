@@ -10,6 +10,7 @@ const UserProvider = ({ children }) => {
   const [pesquisa, setpesquisa] = useState([])
   const [popup_ordem, setpopup_ordem] = useState(false)
   const [ordem, setordem]= useState([])
+  const [loading, setloading]= useState(false)
 
 
   return (
@@ -20,7 +21,8 @@ const UserProvider = ({ children }) => {
         popup, setpopup, 
         pesquisa, setpesquisa, 
         popup_ordem, setpopup_ordem,
-        ordem, setordem 
+        ordem, setordem,
+        loading, setloading
       }}>
       {children}
     </Context.Provider>

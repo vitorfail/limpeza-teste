@@ -18,7 +18,18 @@
 #ordem button{
   margin-bottom: 20px;
 }
+#ordem .roll{
+  width: 100%;
+  height: 100%;
+}
+#ordem  .titulo{
+  font-size: 25px;
+  font-weight: 300;
+  padding-top: 30px;
+  color: var(--fundo4);
+}
 #ordem .resultado{
+  overflow-x: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,6 +43,7 @@
   padding: 0;
   text-align: center;
   color: rgb(75, 75, 75);
+  font-size: 15px;
   width: 40%;
 }
 #ordem .resultado .titulos{
@@ -39,8 +51,14 @@
 }
 #ordem .resultado .titulos, #ordem  .resultado .linha{
   display: flex;
-  width: 80%;
+  width: 100%;
   justify-content: center;
   align-items: center;
   padding: 10px 10px;
+}
+#ordem .resultado #preto{
+  background: rgb(238, 238, 238);
+}
+#ordem .resultado #branco{
+  background: transparent;
 }

@@ -6,18 +6,24 @@ export default function PopupOrdem(){
     return(
         <div id="erro" className={popup_ordem?"popup show": "popup"} >
             <div id="ordem" className={popup_ordem?"modal show": "modal"}>
+                <p className="titulo">Ordem de visita de clientes com base na distância</p>
                 <div className='resultado-pesquisa'>
                     <div className='resultado'>
                         <div className='titulos'>
                         <p className='nome'>Nome</p>
                         <p className='emal'>Distancia</p>
+                        <p className='emal'>Visita</p>
                         </div>
-                        {ordem.map((item, key) =>(
-                        <div key={key} className='linha'>
-                            <p className='nome'>{item.nome}</p>
-                            <p className='emal'>{item.dist}</p>
+                        <div className="roll">
+                            {ordem.map((item, key) =>(
+                                <div id={key%2 ===0?"preto": "branco"} key={key} className='linha'>
+                                    <p className='nome'>{item.nome}</p>
+                                    <p className='emal'>{Math.round(item.dist)}</p>
+                                    <p className='emal'>{(key+1)+"º"}</p>
+                                </div>
+                            ))}
+
                         </div>
-                        ))}
                     </div>
                 </div>
 

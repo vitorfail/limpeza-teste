@@ -76,6 +76,24 @@
   color: var(--fundo3);
 }
 @media screen and (max-width:600px) {
+  .content .mapa {
+    width: 87%;
+  }
+  .content .cad .form {
+    width: 80%;
+  }
+  .content .positions .cadastro-input:nth-child(2){
+    align-items: flex-end;
+  }
+  .content .positions {
+    width: 80%;
+  }
+  .content .cadastro-input{
+    width: 80%;
+  }
+  .content .cadastro-input input {
+    width: 100%;
+  }
   .content{
     width: 100%;
   }

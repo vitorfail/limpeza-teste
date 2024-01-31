@@ -15,14 +15,16 @@ function Home() {
   const [cliente_prox, setcliente_prox] = useState("José")
   const [cliente_long, setcliente_log] = useState("Gilberto")
   const [maior_ponto,setmaior_ponto] = useState(200)
-  const {setpopup_conexao} = useContext(Context)
+  const {setpopup_conexao, setloading} = useContext(Context)
   const [pontos, setpontos] = useState([])
 
   useEffect( () =>{
 
     async function inicio(){
+      setloading(true)
       await Axios.post("api/home").then(
         res =>{
+          setloading(false)
           if(res.data.result.status === 0){
             setpopup_conexao(true)
           }
@@ -60,6 +62,7 @@ function Home() {
           }
         }
       ).catch(err => {
+        setloading(false)
         setpopup_conexao(true)
       })
   
