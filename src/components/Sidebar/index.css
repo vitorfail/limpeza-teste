@@ -20,8 +20,13 @@
     padding-bottom: 7px;
     border-bottom: 0.1px solid var(--branco);
 }
+@font-face {
+    font-family: Boogie;
+    src: url("../../font/BoogieBoys.otf");
+}
 .sidebar .logo p{
-    font-size: 25px;
+    font-family: Boogie;
+    font-size: 45px;
     color: var(--branco);
 }
 .sidebar img{

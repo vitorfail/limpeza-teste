@@ -6,7 +6,6 @@ export default function Sidebar(){
     return(
         <div className="sidebar">
             <div className="logo">
-                <img alt="logo" src={Logo} ></img>
                 <p>Limpeza</p>
             </div>
             <div className="ops">

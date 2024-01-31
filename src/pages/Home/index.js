@@ -13,6 +13,7 @@ function Home() {
   const [cliente, setclientes] = useState(13)
   const [cliente_prox, setcliente_prox] = useState("José")
   const [cliente_long, setcliente_log] = useState("Gilberto")
+  const [maior_ponto,setmaior_ponto] = useState(0)
   const {setpopup_conexao} = useContext(Context)
   const [pontos, setpontos] = useState([])
 
@@ -22,7 +23,6 @@ function Home() {
       await Axios.post("api/home").then(
         res =>{
           if(res.data.result.status === 0){
-            console.log(res.data)
             setpopup_conexao(true)
           }
           if(res.data.result.status === "ok"){
@@ -30,7 +30,14 @@ function Home() {
             setcliente_prox(res.data.result.result.cliente_prox)
             setcliente_log(res.data.result.result.cliente_long)
             setpontos(res.data.result.result.pontos)
-  
+            var lista_pontos = [
+              Math.abs(res.data.result.result.x1) , 
+              Math.abs(res.data.result.result.x2), 
+              Math.abs(res.data.result.result.y1), 
+              Math.abs(res.data.result.result.y2) ]
+              setmaior_ponto(Math.max(...lista_pontos))
+
+
             const percentageA = 40;
             const percentageB = 60;
         
@@ -97,8 +104,8 @@ function Home() {
         <div className='analise'>
           <div className='mapa'>
             <p>Distribuição de clientes pela distância</p>
-            <svg className="chart" viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg">
-              <line x1="-100" y1="0" x2="100" y2="0"></line>
+            <svg className="chart" width={maior_ponto} height={maior_ponto} viewBox={(maior_ponto*-1) + " "+(maior_ponto*-1)+" "+(maior_ponto*2)+" "+(maior_ponto*2)} xmlns="http://www.w3.org/2000/svg">
+              <line x1={maior_ponto*-1} y1="0" x2={maior_ponto} y2="0"></line>
               <line x1="0" y1="-100" x2="0" y2="100"></line>
               
               <line className='fina' x1="-100" y1="20" x2="100" y2="20"></line>
@@ -142,9 +149,9 @@ function Home() {
               <text x="0" y="40">-2</text>
               <text x="0" y="60">-3</text>
               <text x="0" y="80">-4</text>
-              {pontos.map((key,item) => (
-                     <circle key={key} cx={item.x} cy={item.y} r="4" />
-                  ))}            
+              {pontos.map((item, key) => (
+                     <circle key={key} cx={(item.x).toString()} cy={(item.y).toString()} r="4" />
+                  ))}
             </svg>        
           </div>
           <div className='pizza'>

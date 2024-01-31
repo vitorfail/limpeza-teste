@@ -75,6 +75,11 @@
   max-width: 80%;
   height: auto;
 }
+.chart .mes{
+  background: var(--fundo3);
+  width: 200px;
+  height: 100px;
+}
 
 line {
   stroke: var(--fundo4);
