@@ -7,13 +7,14 @@ import Axios from '../../Axios';
 import { Context } from '../../Provider';
 import PopupAviso from '../../popups/PopupAviso';
 import PopupConexao from '../../popups/PopupConexao';
+import PopupOrdem from '../../popups/PopupOrdem';
 
 
 function Home() {
   const [cliente, setclientes] = useState(13)
   const [cliente_prox, setcliente_prox] = useState("José")
   const [cliente_long, setcliente_log] = useState("Gilberto")
-  const [maior_ponto,setmaior_ponto] = useState(0)
+  const [maior_ponto,setmaior_ponto] = useState(200)
   const {setpopup_conexao} = useContext(Context)
   const [pontos, setpontos] = useState([])
 
@@ -35,8 +36,12 @@ function Home() {
               Math.abs(res.data.result.result.x2), 
               Math.abs(res.data.result.result.y1), 
               Math.abs(res.data.result.result.y2) ]
-              setmaior_ponto(Math.max(...lista_pontos))
-
+              if(Math.max(...lista_pontos) < 100 ){
+                setmaior_ponto(100)
+              }
+              else{
+                setmaior_ponto(Math.max(...lista_pontos))
+              }
 
             const percentageA = 40;
             const percentageB = 60;
@@ -74,6 +79,7 @@ function Home() {
     <div className="App">
       <PopupAviso></PopupAviso>
       <PopupConexao></PopupConexao>
+      <PopupOrdem></PopupOrdem>
       <Sidebar></Sidebar>
       <div className='content'>
         <Pesquisa></Pesquisa>
@@ -106,49 +112,47 @@ function Home() {
             <p>Distribuição de clientes pela distância</p>
             <svg className="chart" width={maior_ponto} height={maior_ponto} viewBox={(maior_ponto*-1) + " "+(maior_ponto*-1)+" "+(maior_ponto*2)+" "+(maior_ponto*2)} xmlns="http://www.w3.org/2000/svg">
               <line x1={maior_ponto*-1} y1="0" x2={maior_ponto} y2="0"></line>
-              <line x1="0" y1="-100" x2="0" y2="100"></line>
+              <line x1="0" y1={maior_ponto*-1} x2="0" y2={maior_ponto}></line>
               
-              <line className='fina' x1="-100" y1="20" x2="100" y2="20"></line>
-              <line className='fina' x1="-100" y1="40" x2="100" y2="40"></line>
-              <line className='fina' x1="-100" y1="60" x2="100" y2="60"></line>
-              <line className='fina' x1="-100" y1="80" x2="100" y2="80"></line>
-              <line className='fina' x1="-100" y1="100" x2="100" y2="100"></line>
-              <line className='fina' x1="-100" y1="-20" x2="100" y2="-20"></line>
-              <line className='fina' x1="-100" y1="-40" x2="100" y2="-40"></line>
-              <line className='fina' x1="-100" y1="-60" x2="100" y2="-60"></line>
-              <line className='fina' x1="-100" y1="-80" x2="100" y2="-80"></line>
-              <line className='fina' x1="-100" y1="-100" x2="100" y2="-100"></line>
+              <foreignObject x={maior_ponto*-1} y={maior_ponto*-1} width="100%" height="100%" viewBox={(maior_ponto*-1) + " "+(maior_ponto*-1)+" "+(maior_ponto*2)+" "+(maior_ponto*2)}>
+                <svg width="100%" height="100%" viewBox="-100 -50 200 100">
+                  <line className='fina' x1= "-100" y1="20" x2="100" y2="20"></line>
+                  <line className='fina' x1="-100" y1="40" x2="100" y2="40"></line>
+                  <line className='fina' x1="-100" y1="60" x2="100" y2="60"></line>
+                  <line className='fina' x1="-100" y1="80" x2="100" y2="80"></line>
+                  <line className='fina' x1="-100" y1="100" x2="100" y2="100"></line>
+                  <line className='fina' x1="-100" y1="-20" x2="100" y2="-20"></line>
+                  <line className='fina' x1="-100" y1="-40" x2="100" y2="-40"></line>
+                  <line className='fina' x1="-100" y1="-60" x2="100" y2="-60"></line>
+                  <line className='fina' x1="-100" y1="-80" x2="100" y2="-80"></line>
+                  <line className='fina' x1="-100" y1="-100" x2="100" y2="-100"></line>
 
-              <line className='fina' x1="0" y1="-100" x2="0" y2="100"></line>
-              <line className='fina' x1="20" y1="-100" x2="20" y2="100"></line>
-              <line className='fina' x1="40" y1="-100" x2="40" y2="100"></line>
-              <line className='fina' x1="60" y1="-100" x2="60" y2="100"></line>
-              <line className='fina' x1="80" y1="-100" x2="80" y2="100"></line>
-              <line className='fina' x1="100" y1="-100" x2="100" y2="100"></line>
-              <line className='fina' x1="0" y1="-100" x2="0" y2="100"></line>
-              <line className='fina' x1="-20" y1="-100" x2="-20" y2="100"></line>
-              <line className='fina' x1="-40" y1="-100" x2="-40" y2="100"></line>
-              <line className='fina' x1="-60" y1="-100" x2="-60" y2="100"></line>
-              <line className='fina' x1="-80" y1="-100" x2="-80" y2="100"></line>
-              <line className='fina' x1="-100" y1="-100" x2="-100" y2="100"></line>
+                  <line className='fina' x1="0" y1="-100" x2="0" y2="100"></line>
+                  <line className='fina' x1="20" y1="-100" x2="20" y2="100"></line>
+                  <line className='fina' x1="40" y1="-100" x2="40" y2="100"></line>
+                  <line className='fina' x1="60" y1="-100" x2="60" y2="100"></line>
+                  <line className='fina' x1="80" y1="-100" x2="80" y2="100"></line>
+                  <line className='fina' x1="100" y1="-100" x2="100" y2="100"></line>
+                  <line className='fina' x1="0" y1="-100" x2="0" y2="100"></line>
+                  <line className='fina' x1="-20" y1="-100" x2="-20" y2="100"></line>
+                  <line className='fina' x1="-40" y1="-100" x2="-40" y2="100"></line>
+                  <line className='fina' x1="-60" y1="-100" x2="-60" y2="100"></line>
+                  <line className='fina' x1="-80" y1="-100" x2="-80" y2="100"></line>
+                  <line className='fina' x1="-100" y1="-100" x2="-100" y2="100"></line>
+                </svg>
+              </foreignObject>
 
-              <text x="50" y="220">-2</text>
-              <text x="150" y="220">-1</text>
-              <text x="250" y="220">0</text>
-              <text x="350" y="220">1</text>
-              <text x="210" y="50">2</text>
-              <text x="210" y="150">1</text>
 
-              <text x="2" y="-20">1</text>
-              <text x="2" y="-40">2</text>
-              <text x="2" y="-60">3</text>
-              <text x="2" y="-80">4</text>
-
-              <text x="210" y="250">0</text>
-              <text x="0" y="20">-1</text>
-              <text x="0" y="40">-2</text>
-              <text x="0" y="60">-3</text>
-              <text x="0" y="80">-4</text>
+              <text x="2" y={((maior_ponto/9)*1)*-1}>{Math.round((maior_ponto/9)*1)}</text>
+              <text x="2" y={((maior_ponto/9)*3)*-1}>{Math.round((maior_ponto/9)*3)}</text>
+              <text x="2" y={((maior_ponto/9)*5)*-1}>{Math.round((maior_ponto/9)*5)}</text>
+              <text x="2" y={((maior_ponto/9)*7)*-1}>{Math.round((maior_ponto/9)*7)}</text>
+              <text x="210" y={((maior_ponto/9)*9)*-1}>{Math.round((maior_ponto/9)*9)}</text>
+              <text x="0" y={(maior_ponto/9)*1}>{Math.round((maior_ponto/9)*1)*-1}</text>
+              <text x="0" y={(maior_ponto/9)*3}>{Math.round((maior_ponto/9)*3)*-1}</text>
+              <text x="0" y={(maior_ponto/9)*5}>{Math.round((maior_ponto/9)*5)*-1}</text>
+              <text x="0" y={(maior_ponto/9)*7}>{Math.round((maior_ponto/9)*7)*-1}</text>
+              <text x="0" y={(maior_ponto/9)*9}>{Math.round((maior_ponto/9)*9)*-1}</text>
               {pontos.map((item, key) => (
                      <circle key={key} cx={(item.x).toString()} cy={(item.y).toString()} r="4" />
                   ))}

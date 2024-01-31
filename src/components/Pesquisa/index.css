@@ -4,5 +4,56 @@
     background: var(--barra-pesquisa) ;
     width: 100%;
     height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.pesquisa .visita{
+    background: var(--fundo-branco);
+    height: 30px;
+    width: 130px;
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    font-weight: 200;
+    margin-left: 20px;
+    font-size: 15px;
+}
+.pesquisa .visita:hover{
+  color: white;
+  background: transparent;
+  outline: 1px solid white
+}
+  .pesquisa .input{
+    box-shadow: 0px 0px 3px var(--sombra);
+    width: auto;
+    height: 30px;
+    display: flex;
+    margin-left: -15%;
+  }
+  .pesquisa .input input, .pesquisa .input select{
+    border: none;
+    outline: none;
+    height: 100%;
+  }  
+  .pesquisa .input input{
+    padding-left: 7px;
+    width: 350px;
+  }
+  .pesquisa .input select{
+    font-weight: 300;
+    color: rgb(138, 138, 138);
+    padding: 6px;
+  }
+  .pesquisa button{
+    outline: none;
+    border: none;
+    cursor: pointer;
+    height: 100%;
+    aspect-ratio: 1/1;
+    background: rgb(99, 198, 108);
+  }
+  .pesquisa button img{
+    width: 10px;
+    height: auto;
   }
   

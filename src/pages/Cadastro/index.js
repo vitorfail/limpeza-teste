@@ -8,6 +8,7 @@ import PopupAviso from "../../popups/PopupAviso"
 import PopupConexao from "../../popups/PopupConexao"
 import PopupOk from '../../popups/PopupOk';
 import Popup from '../../popups/Popup';
+import PopupOrdem from '../../popups/PopupOrdem';
 
 function Cadastro() {
   const [nome, setnome] = useState("")
@@ -37,7 +38,6 @@ function Cadastro() {
     }
   }
   function position(e){
-    console.log(e)
     let valorFormatado = e.replace(/[^-0-9]/g, '');
 
     // Remover zeros à esquerda, exceto o caso em que é um número decimal (ex: "-0.5")
@@ -52,6 +52,7 @@ function Cadastro() {
       <PopupConexao></PopupConexao>
       <PopupOk></PopupOk>
       <Popup></Popup>
+      <PopupOrdem></PopupOrdem>
       <Sidebar></Sidebar>
       <div className='content'>
         <Pesquisa></Pesquisa>
