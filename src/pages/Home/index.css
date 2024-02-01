@@ -83,14 +83,16 @@
 
 line {
   stroke: var(--fundo4);
-  stroke-width: 1;
+  stroke-width: 0.4%;
 }
 .fina{
   stroke-width: 0.3;
 }
 .mapa text {
+  animation: esperar 2s ease-in-out;
   font-weight: 200;
-  font-size: 8px;
+  width: 50%;
+  height: 50%;
   fill: var(--fundo4);
 }
 .mapa circle{
@@ -171,6 +173,17 @@ line {
   }
   100%{
     scale: 1;
+  }
+}
+@keyframes esperar {
+  0%{
+    opacity: 0;
+  }
+  70%{
+    opacity: 0;
+  }
+  100%{
+    opacity:  1;
   }
 }
 @media screen and (max-width:700px) {

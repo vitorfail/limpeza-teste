@@ -50,6 +50,7 @@
   font-weight: 300;
 }
 .content .resultado .titulos p, .content .resultado .linha p{
+  overflow-wrap: break-word;
   text-align: center;
   color: rgb(75, 75, 75);
   width: 30%;
@@ -68,4 +69,8 @@
   .content{
     width: 100%;
   }
+  .content .resultado .titulos p, .content .resultado .linha p{
+    padding-right: 8px;
+    padding-left: 8px;
+  }  
 }

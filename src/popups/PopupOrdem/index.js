@@ -4,7 +4,7 @@ import { Context } from "../../Provider"
 export default function PopupOrdem(){
     const {popup_ordem, setpopup_ordem, ordem} = useContext(Context)
     return(
-        <div id="erro" className={popup_ordem?"popup show": "popup"} >
+        <div  className={popup_ordem?"popup show": "popup"} >
             <div id="ordem" className={popup_ordem?"modal show": "modal"}>
                 <p className="titulo">Ordem de visita de clientes com base na distância</p>
                 <div className='resultado-pesquisa'>

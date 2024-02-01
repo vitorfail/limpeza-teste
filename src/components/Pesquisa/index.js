@@ -16,7 +16,6 @@ export default function Pesquisa(){
         Axios.post("api/pesquisa", {valor:valor_pesquisa, op: option})
         .then(res => {
             setloading(false)
-            console.log(res.data.result)
             if(res.data.result.status === 0){
                 setpopup_conexao(true)
               }

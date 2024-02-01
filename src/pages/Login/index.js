@@ -1,7 +1,7 @@
 import './index.css';
 import { useContext, useState } from 'react';
-import Cliente from "../../img/client.png"
-import Cadeado from "../../img/senha.png"
+import Cliente from "../../img/user.png"
+import Cadeado from "../../img/cadeado.png"
 import Axios from '../../Axios';
 import { Context } from '../../Provider';
 import { useHistory } from 'react-router-dom';
@@ -229,7 +229,7 @@ function Login() {
                 <div></div>
               </div>
           </div>
-          <h3 className={ mensagem_cadastro!==""?"mensagem show":"mensagem"}>Usuário já existe</h3>
+          <h3 className={ mensagem_cadastro?"mensagem show":"mensagem"}>Usuário já existe</h3>
           <div className='entrada'>
             <img alt='user' src={Cliente}></img>
             <input onChange={(e) => setuser_cad(e.target.value)} placeholder='Usuário'></input>

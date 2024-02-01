@@ -1,8 +1,4 @@
-#ok img{
-  animation: icon 0.8s linear;
-  width: 30%;
-  height: auto;
-}
+
 #ok button{
   color: var(--branco);
   height: 40px;

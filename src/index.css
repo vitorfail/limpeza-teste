@@ -70,10 +70,12 @@
   display: flex;
 }
 .popup .modal img{
-  animation: icon 0.4s linear;
+  width: 150px;
+  margin-bottom: 20px;
+  animation: icon 0.2s ease-in-out;
 }
 .popup .modal.show{
-  animation: popup 0.5s cubic-bezier(0.4, 0, 1, 1);
+  animation: popup 0.3s cubic-bezier(0.4, 0, 1, 1);
   display: flex;
 }
 .popup .modal{
@@ -99,15 +101,23 @@
   }
 }
 @keyframes popup {
-  from{
+  0%{
     scale: 0;
   }
-  to{
+  70%{
+    scale: 1.09;
+  }
+  100%{
     scale: 1;
   }
 }
 @media screen and (max-width:700px) {
+  .popup .modal img{
+    width: 100px;
+  }
   .popup .modal{
-    font-size: 12px;
+    height: 40%;
+    width: 90%;
+    font-size: 15px;
   }
 }

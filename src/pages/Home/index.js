@@ -22,49 +22,57 @@ function Home() {
 
     async function inicio(){
       setloading(true)
-      await Axios.post("api/home").then(
-        res =>{
+      try{
+        await Axios.post("api/home").then(
+          res =>{
+            setloading(false)
+            if(res.data.result.status === 0){
+              setpopup_conexao(true)
+            }
+            if(res.data.result.status === "ok"){
+              setclientes(res.data.result.result.total)
+              setcliente_prox(res.data.result.result.cliente_prox)
+              setcliente_log(res.data.result.result.cliente_long)
+              setpontos(res.data.result.result.pontos)
+              var lista_pontos = [
+                Math.abs(res.data.result.result.x1) , 
+                Math.abs(res.data.result.result.x2), 
+                Math.abs(res.data.result.result.y1), 
+                Math.abs(res.data.result.result.y2) ]
+                if(Math.max(...lista_pontos) < 100 ){
+                  setmaior_ponto(100)
+                }
+                else{
+                  setmaior_ponto(Math.max(...lista_pontos))
+                }
+  
+              const percentageA = 40;
+              const percentageB = 60;
+          
+              // Calcula o ângulo com base nas porcentagens
+              const angleA = (percentageA / 100) * 360;
+              const angleB = (percentageB / 100) * 360;
+          
+              // Atualiza o tamanho das fatias
+              const sliceA = document.getElementById('slicea');
+              sliceA.setAttribute('d', calculateSlicePath(0, angleA));
+          
+              const sliceB = document.getElementById('sliceb');
+              sliceB.setAttribute('d', calculateSlicePath(angleA, angleB));
+          
+            }
+          }
+        ).catch(err => {
           setloading(false)
-          if(res.data.result.status === 0){
-            setpopup_conexao(true)
-          }
-          if(res.data.result.status === "ok"){
-            setclientes(res.data.result.result.total)
-            setcliente_prox(res.data.result.result.cliente_prox)
-            setcliente_log(res.data.result.result.cliente_long)
-            setpontos(res.data.result.result.pontos)
-            var lista_pontos = [
-              Math.abs(res.data.result.result.x1) , 
-              Math.abs(res.data.result.result.x2), 
-              Math.abs(res.data.result.result.y1), 
-              Math.abs(res.data.result.result.y2) ]
-              if(Math.max(...lista_pontos) < 100 ){
-                setmaior_ponto(100)
-              }
-              else{
-                setmaior_ponto(Math.max(...lista_pontos))
-              }
-
-            const percentageA = 40;
-            const percentageB = 60;
-        
-            // Calcula o ângulo com base nas porcentagens
-            const angleA = (percentageA / 100) * 360;
-            const angleB = (percentageB / 100) * 360;
-        
-            // Atualiza o tamanho das fatias
-            const sliceA = document.getElementById('slicea');
-            sliceA.setAttribute('d', calculateSlicePath(0, angleA));
-        
-            const sliceB = document.getElementById('sliceb');
-            sliceB.setAttribute('d', calculateSlicePath(angleA, angleB));
-        
-          }
-        }
-      ).catch(err => {
+          setpopup_conexao(true)
+        })
+  
+      }
+      catch{
         setloading(false)
         setpopup_conexao(true)
-      })
+
+      }
   
     }
   // Função para calcular o caminho da fatia
@@ -146,18 +154,31 @@ function Home() {
               </foreignObject>
 
 
-              <text x="2" y={((maior_ponto/9)*1)*-1}>{Math.round((maior_ponto/9)*1)}</text>
-              <text x="2" y={((maior_ponto/9)*3)*-1}>{Math.round((maior_ponto/9)*3)}</text>
-              <text x="2" y={((maior_ponto/9)*5)*-1}>{Math.round((maior_ponto/9)*5)}</text>
-              <text x="2" y={((maior_ponto/9)*7)*-1}>{Math.round((maior_ponto/9)*7)}</text>
-              <text x="210" y={((maior_ponto/9)*9)*-1}>{Math.round((maior_ponto/9)*9)}</text>
-              <text x="0" y={(maior_ponto/9)*1}>{Math.round((maior_ponto/9)*1)*-1}</text>
-              <text x="0" y={(maior_ponto/9)*3}>{Math.round((maior_ponto/9)*3)*-1}</text>
-              <text x="0" y={(maior_ponto/9)*5}>{Math.round((maior_ponto/9)*5)*-1}</text>
-              <text x="0" y={(maior_ponto/9)*7}>{Math.round((maior_ponto/9)*7)*-1}</text>
-              <text x="0" y={(maior_ponto/9)*9}>{Math.round((maior_ponto/9)*9)*-1}</text>
+
+              <text y="-6" style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} x={((maior_ponto/9)*1)*-1}>{Math.round((maior_ponto/9)*1)}</text>
+              <text y="-6" style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} x={((maior_ponto/9)*3)*-1}>{Math.round((maior_ponto/9)*3)}</text>
+              <text y="-6" style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} x={((maior_ponto/9)*5)*-1}>{Math.round((maior_ponto/9)*5)}</text>
+              <text y="-6" style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} x={((maior_ponto/9)*7)*-1}>{Math.round((maior_ponto/9)*7)}</text>
+              <text y="-6" style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} x={((maior_ponto/9)*9)*-1}>{Math.round((maior_ponto/9)*9)}</text>
+              <text y="-6" style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} x={(maior_ponto/9)*1}>{Math.round((maior_ponto/9)*1)*-1}</text>
+              <text y="-6" style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} x={(maior_ponto/9)*3}>{Math.round((maior_ponto/9)*3)*-1}</text>
+              <text y="-6" style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} x={(maior_ponto/9)*5}>{Math.round((maior_ponto/9)*5)*-1}</text>
+              <text y="-6" style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} x={(maior_ponto/9)*7}>{Math.round((maior_ponto/9)*7)*-1}</text>
+              <text y="-6" style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} x={(maior_ponto/9)*9}>{Math.round((maior_ponto/9)*9)*-1}</text>
+
+
+              <text x="2"  style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} y={((maior_ponto/9)*1)*-1}>{Math.round((maior_ponto/9)*1)}</text>
+              <text x="2"  style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} y={((maior_ponto/9)*3)*-1}>{Math.round((maior_ponto/9)*3)}</text>
+              <text x="2"  style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} y={((maior_ponto/9)*5)*-1}>{Math.round((maior_ponto/9)*5)}</text>
+              <text x="2"  style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} y={((maior_ponto/9)*7)*-1}>{Math.round((maior_ponto/9)*7)}</text>
+              <text x="210" style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}}  y={((maior_ponto/9)*9)*-1}>{Math.round((maior_ponto/9)*9)}</text>
+              <text x="0"  style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} y={(maior_ponto/9)*1}>{Math.round((maior_ponto/9)*1)*-1}</text>
+              <text x="0"  style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} y={(maior_ponto/9)*3}>{Math.round((maior_ponto/9)*3)*-1}</text>
+              <text x="0"  style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} y={(maior_ponto/9)*5}>{Math.round((maior_ponto/9)*5)*-1}</text>
+              <text x="0"  style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} y={(maior_ponto/9)*7}>{Math.round((maior_ponto/9)*7)*-1}</text>
+              <text x="0"  style={{fontSize:maior_ponto>100?"2vh": "0.9vh"}} y={(maior_ponto/9)*9}>{Math.round((maior_ponto/9)*9)*-1}</text>
               {pontos.map((item, key) => (
-                     <circle key={key} cx={(item.x).toString()} cy={(item.y).toString()} r="4" />
+                     <circle key={key} cx={(item.x).toString()} cy={(item.y).toString()} r="1%" />
                   ))}
             </svg>        
           </div>
