@@ -105,14 +105,14 @@ function Home() {
           <div className='card'>
             <div className='titulo'>
               <p>{cliente_prox}</p>
-              <p>É o cliente mais próximo</p>
+              <p>É a distência do cliente mais próximo</p>
             </div>
             <img alt='img' src={Cli}></img>
           </div>
           <div className='card'>
             <div className='titulo'>
               <p>{cliente_long}</p>
-              <p>É o cliente mais distante</p>
+              <p>É distância do cliente mais longe</p>
             </div>
             <img alt='img' src={Cli}></img>
           </div>

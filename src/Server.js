@@ -1,1 +1,1 @@
-export const Url = "https://limpeza-beckend.vercel.app/"
+export const Url = process.env.REACT_APP_API_URL
