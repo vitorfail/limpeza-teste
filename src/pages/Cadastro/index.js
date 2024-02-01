@@ -24,7 +24,12 @@ function Cadastro() {
     }
     else{
       setloading(true)
-      Axios.post("/api/cadastro_cliente", {nome:nome, email:email ,telefone:telefone, x:-parseInt(pos_x, 10), y:-parseInt(pos_y, 10)})
+      Axios.post("/api/cadastro_cliente", {
+        nome:nome, 
+        email:email ,
+        telefone:telefone.replace("(", "").replace(")", "").replace("-", "").replace(" ", "") , 
+        x:-parseInt(pos_x, 10), 
+        y:-parseInt(pos_y, 10)})
       .then(res => {
         setloading(false)
         if(res.data.result.status === "EXIST"){

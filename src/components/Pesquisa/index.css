@@ -115,6 +115,9 @@
     .pesquisa .visita:before{
       content: "Ordem";
     }
+    #principal{
+      width: 100%;
+    }
   }
   @keyframes girar {
     0%{

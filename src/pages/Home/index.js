@@ -69,7 +69,7 @@ function Home() {
     }
   // Função para calcular o caminho da fatia
   inicio()
-  }, [])
+  }, [setloading, setpopup_conexao])
   const calculateSlicePath = (startAngle, endAngle) => {
     const radius = 50;
     const startX = Math.cos((startAngle - 90) * (Math.PI / 180)) * radius;

@@ -7,6 +7,9 @@ import { Context } from '../../Provider';
 import { useHistory } from 'react-router-dom';
 import PopupAviso from '../../popups/PopupAviso';
 import PopupAvisoConexao from '../../popups/PopupConexao';
+import Olho from "../../img/olho.png"
+import Olho2 from "../../img/olho_2.png"
+
 
 function Login() {
   const {setpopup_aviso} = useContext(Context)
@@ -15,7 +18,6 @@ function Login() {
   const titulo_reg= "Cadastrar"
   const log = "Caso já tenha uma conta você pode efetuar seu login para iniciar sua sessão"
   const reg = "Se você ainda não tem uma conta pode criar a sua. Creie um nome de usuário e uma senha. "
-  const erro_senha_user = "Senha ou usuário errado"
   const erro_exist = "Usuário já existe"
   const [lado, setlado] = useState("35%")
   const [ titulo, settitulo] = useState(titulo_reg)
@@ -40,6 +42,12 @@ function Login() {
   const [senha_numero, setsenha_numero] = useState(false)
   const [senha_diferente, setsenha_diferente] = useState(false)
 
+  const [index_login, setindex_login] = useState(false)
+  const [index_cad, setindex_cad] = useState(false)
+  const [olho_1, setolho_1] = useState(true)
+  const [olho_2, setolho_2] = useState(true)
+  const [olho_3, setolho_3] = useState(true)
+
   function trocar(){
     if(lado === "35%"){
       setlado("0")
@@ -57,6 +65,7 @@ function Login() {
     setloading_1(true)
     setaviso_senha(false)
     setaviso_user(false)
+    setmensagem("")
     if(user === "" || senha ===""){
       setloading_1(false)
       if(senha === ""){
@@ -78,7 +87,12 @@ function Login() {
           setloading_1(false)
           setmensagem(erro_exist)
         }
+        if(res.data.result.status === 2){
+          setloading_1(false)
+          setmensagem("Senha ou usuáro incorretos")
+        }
         else{
+          
           setloading_1(false)
           localStorage.setItem("token_jwt", res.data.result.token)
           history.push("/")
@@ -92,7 +106,7 @@ function Login() {
   }
   function senha_1(e){
     setsenha(e)
-    if(e != ""){
+    if(e !== ""){
       if(e.length < 9){
         setsenha_tamanho(true)
       }
@@ -168,7 +182,7 @@ function Login() {
 
           <button onClick={() => trocar()}>{titulo} </button>
         </div>
-        <div className='lado-direto'>
+        <div style={{zIndex: index_login?1:0}} className='lado-direto'>
           <div className={loading_1?'loading show': 'loading' }>
             <div className="lds-grid">
               <div></div>
@@ -191,13 +205,17 @@ function Login() {
           <p className={aviso_user?"aviso show": "aviso"} >Insira seu usuário</p>
           <div className='entrada'>
             <img alt='senha' src={Cadeado}></img>
-            <input onChange={(e) => setsenha(e.target.value)} type="password" placeholder='Senha'></input>
+            <input onChange={(e) => setsenha(e.target.value)} type={olho_1?"password":"text"} placeholder='Senha'></input>
+            <img alt='senha' onClick={() => setolho_1(olho_1?false:true )} src={olho_1?Olho: Olho2}></img>
           </div>
           <p className={aviso_senha?"aviso show": "aviso"}>Insira sua senha</p>
+          <div onClick={() => {setindex_cad(true); setindex_login(false)}} className='sugestao'>
+            <p>Não tem cadastro?</p>
+          </div>
           <button onClick={() => login()}>ACESSAR</button>
         </div>
-        <div className='lado-esquerdo'>
-        <p>CADASTRAR</p>
+        <div style={{zIndex: index_cad?1:0}} className='lado-esquerdo'>
+          <p>CADASTRAR</p>
           <div className={loading_2?'loading show': 'loading' }>
               <div className="lds-grid">
                 <div></div>
@@ -219,13 +237,18 @@ function Login() {
           <p className= {aviso_cadastro?"aviso show": "aviso"} >Insira um usuário</p>
           <div className='entrada'>
             <img alt='senha' src={Cadeado}></img>
-            <input onChange={(e) => senha_1(e.target.value)} type="password" placeholder='Senha'></input>
+            <input onChange={(e) => senha_1(e.target.value)} type={olho_2?"password":"text"}  placeholder='Senha'></input>
+            <img alt='senha' onClick={() => setolho_2(olho_2?false:true )} src={olho_2?Olho: Olho2}></img>
+
           </div>
           <div className='entrada'>
             <img alt='senha' src={Cadeado}></img>
-            <input onChange={(e) => senha_2(e.target.value)} type="password" placeholder='Confirmar senha'></input>
+            <input onChange={(e) => senha_2(e.target.value)} type={olho_3?"password":"text"} placeholder='Confirmar senha'></input>
+            <img alt='senha' onClick={() => setolho_3(olho_3?false:true )} src={olho_3?Olho: Olho2}></img>
           </div>
-
+          <div onClick={() => {setindex_cad(false); setindex_login(true)}} className='sugestao'>
+            <p>Já tem uma conta?</p>
+          </div>
           <p className={senha_tamanho?'avisos show':'avisos'}><strong>X</strong> A senha deve ter no minimo 9 caracteres</p>
           <p className={senha_numero?'avisos show':'avisos'}><strong>X</strong>A senha deve tem pelo menos um número</p>
           <p className={senha_diferente?'avisos show':'avisos'}><strong>X</strong>As senhas estão diferentes</p>

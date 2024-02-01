@@ -141,7 +141,11 @@
 .login .mensagem.aviso.show{
   display: flex;
 }
+.login  .mensagem.show{
+  display: flex;
+}
 .login  .mensagem{
+  text-align: center;
   animation: erro 0.3s linear;
   background: rgba(255, 0, 0, 0.068);
   border: 1px solid red;
@@ -236,6 +240,26 @@
   font-weight: 500;
   font-size: 8px;
 }
+.login .sugestao{
+  align-items: center;
+  height: 35px;
+  width: 60%;
+  display: none;
+  justify-content: flex-end;
+}
+.login .sugestao p{
+  font-size: 15px;
+  font-weight: 200;
+  color: var(--fundo2);
+  height: 20px;
+  border-bottom: 1.7px solid var(--fundo2) ;
+}
+.login .sugestao p:hover{
+  cursor: pointer;
+  color: var(--fundo-branco);
+  border-bottom: 1px solid var(--fundo-branco) ;
+
+}
 @keyframes lds-grid {
   0%, 100% {
     opacity: 1;
@@ -250,6 +274,30 @@
   }
   100%{
     transform: rotateY(0deg);
+  }
+}
+@media screen and (max-width:600px) {
+  .login .lado-direto, .login .lado-esquerdo{
+    height: 70%;
+    width: 70%;
+    position: absolute;
+  }
+  .login{
+    height: 70%;
+    width: 70%;
+  }
+  .login .placa{
+    display: none;
+  }
+  .login .sugestao{
+    width: 70%;
+    display: flex;
+  }
+  .login .sugestao p{
+    font-size: 10px;
+  }
+  .login  .mensagem{
+    width: 70%;
   }
 }
 @media screen and (max-width:700px) {
