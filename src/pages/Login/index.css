@@ -222,6 +222,7 @@
   display: flex;
 }
 .login .lado-esquerdo .avisos{
+  animation: aparecer 0.2s linear;
   display: none;
   align-items: center;
   margin-top: 9px;
@@ -242,6 +243,9 @@
   border: 1px solid red;
   font-weight: 500;
   font-size: 8px;
+}
+.login #olho{
+  width: 25px;
 }
 .login .sugestao{
   align-items: center;
@@ -280,13 +284,21 @@
   }
 }
 @media screen and (max-width:600px) {
+  .login .avisos strong{
+    margin-right: 7px;
+  }
+  .login .lado-esquerdo .avisos {
+    margin-left: 12px;
+    align-items: flex-start;  
+    width: 75%;
+  }
   .login .lado-direto, .login .lado-esquerdo{
-    height: 70%;
+    height: 60%;
     width: 70%;
     position: absolute;
   }
   .login{
-    height: 70%;
+    height: 60%;
     width: 70%;
   }
   .login .placa{
@@ -297,43 +309,60 @@
     display: flex;
   }
   .login .sugestao p{
+    margin-top: 20px;
     font-size: 10px;
   }
   .login  .mensagem{
     width: 70%;
   }
+  .login #olho{
+    right: -37px;
+  }
 }
 @media screen and (max-width:700px) {
   .login p {
+    margin-bottom: 30px;
     font-size: 20px;
   }
   .login .placa p {
-    font-size: 20px;
+    font-size: 30px;
   }
   .login .placa h4{
     font-size: 10px;
   }
   .login .entrada input {
     width: 100px;
-    font-size: 10px;
+    font-size: 17px;
   }
   .login .entrada {
-    width: 73%;
-    height: 20px;
+    height: 40px;
+    width: 73%;  
+    justify-content: flex-start;
   }
   .login .entrada img {
-    width: 10px;
+    width: 17px;
   }
   .login .aviso {
     font-size: 10px;
   }
-  .login .lado-esquerdo button, .login .lado-direto button {
-    font-size: 10px;
+  .login .lado-direto button, .login .lado-esquerdo button {
+    margin-top: 15px;
+    font-size: 17px;
+    height: 40px;
     width: 73%;
-    height: 30px;
-  }
+}
   .login .placa button{
     font-size: 10px;
     height: 25px;
+  }
+}
+@keyframes sugestao {
+  0%{
+    opacity: 1;
+    transform: translateY(-30px);
+  }
+  0%{
+    opacity: 1;
+    transform: translateY(0px);
   }
 }

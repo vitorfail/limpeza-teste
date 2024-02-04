@@ -206,7 +206,7 @@ function Login() {
           <div className='entrada'>
             <img alt='senha' src={Cadeado}></img>
             <input onChange={(e) => setsenha(e.target.value)} type={olho_1?"password":"text"} placeholder='Senha'></input>
-            <img alt='senha' onClick={() => setolho_1(olho_1?false:true )} src={olho_1?Olho: Olho2}></img>
+            <img alt='senha' id="olho" onClick={() => setolho_1(olho_1?false:true )} src={olho_1?Olho: Olho2}></img>
           </div>
           <p className={aviso_senha?"aviso show": "aviso"}>Insira sua senha</p>
           <div onClick={() => {setindex_cad(true); setindex_login(false)}} className='sugestao'>
@@ -238,20 +238,20 @@ function Login() {
           <div className='entrada'>
             <img alt='senha' src={Cadeado}></img>
             <input onChange={(e) => senha_1(e.target.value)} type={olho_2?"password":"text"}  placeholder='Senha'></input>
-            <img alt='senha' onClick={() => setolho_2(olho_2?false:true )} src={olho_2?Olho: Olho2}></img>
+            <img alt='senha' id="olho" onClick={() => setolho_2(olho_2?false:true )} src={olho_2?Olho: Olho2}></img>
 
           </div>
           <div className='entrada'>
             <img alt='senha' src={Cadeado}></img>
             <input onChange={(e) => senha_2(e.target.value)} type={olho_3?"password":"text"} placeholder='Confirmar senha'></input>
-            <img alt='senha' onClick={() => setolho_3(olho_3?false:true )} src={olho_3?Olho: Olho2}></img>
+            <img alt='senha' id="olho" onClick={() => setolho_3(olho_3?false:true )} src={olho_3?Olho: Olho2}></img>
           </div>
           <div onClick={() => {setindex_cad(false); setindex_login(true)}} className='sugestao'>
             <p>Já tem uma conta?</p>
           </div>
-          <p className={senha_tamanho?'avisos show':'avisos'}><strong>X</strong> A senha deve ter no minimo 9 caracteres</p>
-          <p className={senha_numero?'avisos show':'avisos'}><strong>X</strong>A senha deve tem pelo menos um número</p>
-          <p className={senha_diferente?'avisos show':'avisos'}><strong>X</strong>As senhas estão diferentes</p>
+          <p className={senha_tamanho?'avisos show':'avisos'}><strong>X</strong>  Deve ter no minimo 9 caracteres</p>
+          <p className={senha_numero?'avisos show':'avisos'}><strong>X</strong>  Deve ter pelo menos um número</p>
+          <p className={senha_diferente?'avisos show':'avisos'}><strong>X</strong>  As senhas estão diferentes</p>
           <button onClick={() => registro()} >REGISTRAR</button>
         </div>
       </div>
