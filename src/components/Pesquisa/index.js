@@ -48,12 +48,17 @@ export default function Pesquisa(){
             setpopup_conexao(true)
         })
     }
+    function exit(){
+        localStorage.removeItem("token_jwt")
+        history.push("/login")
+    }
+
     return(
         <div className="pesquisa">
             <div className={show_menu?"mini-menu show": "mini-menu"}>
                 <p onClick={() => history.push("/")}>Home</p>
                 <p onClick={() => history.push("/cadastro")}>Cadastro</p>
-                <p onClick={() => history.push("/")}>Sair</p>
+                <p onClick={() => exit()}>Sair</p>
             </div>
             <img onClick={() => show_menu?setshow_menu(false): setshow_menu(true)} className="lista" alt="lista" src={Lista}></img>
             <div className="input">

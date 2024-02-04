@@ -76,9 +76,6 @@
   color: var(--fundo3);
 }
 @media screen and (max-width:600px) {
-  .content .mapa {
-    width: 87%;
-  }
   .content .cad .form {
     width: 80%;
   }
